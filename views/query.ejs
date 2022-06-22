@@ -1,27 +1,35 @@
 <%- include("partials/header") -%>
 
     <header>
-        <h3>Current Weather For</h3>
-        <h1>
+        <h3 class="prompt">Current Weather For</h3>
+        <h1 class="title">
             <%= Location %>
         </h1>
     </header>
+
     <main>
-        <img src=<%=iconURL %>>
-        <h2>
+
+
+        <img src=<%=iconURL %> class="img-fluid rounded-start">
+        <h5 class="">
             <%= Description %>
-        </h2>
-        <p>Temperature: <%= Temperature %> ℃
+
+        </h5>
+        <p class="">Temperature: <%= Temperature %> ℃
         </p>
-        <p>Feels Like: <%= FeelsLike %> ℃
+        <p class="">Feels Like: <%= FeelsLike %> ℃
         </p>
-        <p>Max Temperature: <%= MaxTemperature %> ℃
+        <p class="">Max Temperature: <%= MaxTemperature %> ℃
         </p>
-        <p>Min Temperature: <%= MinTemperature %> ℃
+        <p class="">Min Temperature: <%= MinTemperature %> ℃
         </p>
-        <p>Humidity: <%= Humidity %>
+
+        <p class="">Humidity: <%= Humidity %>
         </p>
-        <p> Wind Speed: <%= wind %> mph</p>
+        <p class=""> Wind Speed: <%= wind %> mph</p>
+        </div>
+      
     </main>
+   
 
     <%- include("partials/footer") -%>

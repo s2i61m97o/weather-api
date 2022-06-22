@@ -1,8 +1,26 @@
-<%- include("partials/header") -%> 
+<%- include("partials/header") -%>
 
-<h1>ERROR <%= errorCode %> </h1>
-<h2><%= errorMessage %> </h2>
+    <header>
+        <h1 class="title">ERROR <%= errorCode %>
+        </h1>
+        <h2 class="error-message">
+            <%= errorMessage %>
+        </h2>
+    </header>
 
-<button>Return Home</button>
 
-<%- include("partials/footer") -%> 
+    <main>
+       
+        <div class="new-query"></div>
+        <h3 class="prompt">Try Another Location:</h3>
+        <form action="/" method="post" id="query">
+            <div class="form-group">
+                <input type="text" name="location" id="location" class="form-control" autocomplete="off"
+                    placeholder="e.g. London">
+            </div>
+        </form>
+        <button type="submit" form="query" value="Submit" class="btn btn-primary search-btn">Search</button>
+        </div>
+
+    </main>
+    <%- include("partials/footer") -%>

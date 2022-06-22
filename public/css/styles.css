@@ -1,11 +1,66 @@
 body {
-    text-align: center;
+  background-image: url("/assets/pexels-pixabay-460672.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
+}
+
+header,
+main {
+  color: #151518;
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+  text-shadow: 1px 1px 2px whitesmoke;
 }
 
 header {
-    margin-top: 6.25rem;
+  margin-top: 8rem;
 }
 
-h1 {
-    font-size: 96px;
+.title {
+  padding: 1.5rem;
+  font-size: 2.25rem;
+}
+
+.error-message {
+  font-size: 1.5rem;
+  padding-bottom: 0.9375rem;
+}
+
+.prompt {
+  font-size: 1.15rem;
+  text-shadow: 0.5px 0.5px 1px whitesmoke;
+}
+
+input {
+  text-align: center;
+}
+
+button {
+  margin: 1rem;
+}
+
+footer {
+  color: aliceblue;
+  text-align: right;
+  margin: 8rem auto;
+  position: fixed;
+  height: 50px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin-bottom: 0px;
+}
+
+footer p {
+  text-shadow: 0.5px 0.5px 1px black;
+  display: inline;
+  padding: 1rem;
+}
+
+.image-attri,
+.data-attri {
+  text-shadow: none;
 }

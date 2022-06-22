@@ -1,20 +1,20 @@
-<%- include("partials/header") -%> 
-<header>
-    <h1>WEATHER APP</h1>    
-</header>
+<%- include("partials/header") -%>
 
-<main>
-    <h3>Just Enter A Location Below To See The Current Weather</h3>
-    <form action="/" method="post">
+    <header>
+        <h1 class="title">Weather Search:</h1>
+        <h3 class="prompt">Enter a Location</h3>
+    </header>
 
-        <div class="form-group">
-           <input type="text" name="location" id="location" class="form-control" autocomplete="off" placeholder="e.g. London">
-        </div>
-
-
-    </form>
-</main>
-
+    <main>
+        <form action="/" method="post" id="query">
+            <div class="form-group">
+                <input type="text" name="location" id="location" class="form-control" autocomplete="off"
+                    placeholder="e.g. London">
+            </div>
+        </form>
+        <button type="submit" form="query" value="Submit" class="btn btn-primary search-btn">Search</button>
 
 
-<%- include("partials/footer") -%> 
+    </main>
+
+    <%- include("partials/footer") -%>
