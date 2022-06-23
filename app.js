@@ -1,4 +1,4 @@
-//Package Requires
+//Packages
 require('dotenv').config();
 const express = require("express");
 const ejs = require("ejs");
@@ -18,50 +18,37 @@ app.use(express.static(__dirname + '/public'));
 //Body-Parser
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const newSearch = function(){
-    res.render("home")
-}
-
 //Homepage Render
 app.get("/", (req, res) => res.render("home"));
 
 //Query Request
 app.post("/", (req, res) => {
-    
+
     const queryLocation = req.body.location;
     const apiKey = process.env.API_KEY;
     const unit = "metric";
 
     //API Call
     const url = "https://api.openweathermap.org/data/2.5/weather?q=" + queryLocation + "&appid=" + apiKey + "&units=" + unit;
-    
+
     https.get(url, (response) => {
         response.on("data", (data) => {
             const weatherData = JSON.parse(data);
-            // console.log(weatherData);
-    
+            const { coord, weather, base, main, visibility, wind, clouds, dt, sts, timezone, id, name, cod, message } = weatherData;
+
             //Unknown location error === 404
-            if (weatherData.cod === "404") {
-                const errorCode = weatherData.cod;
-                const errorMessage = (weatherData.message).toUpperCase();
+            if (cod === "404") {
+                const errorCode = cod;
+                const errorMessage = (message).toUpperCase();
                 res.render("error", { errorCode: errorCode, errorMessage: errorMessage });
-    
+
                 //Successful Call === 200   
-            } else if (weatherData.cod === 200) {
-                const temp = Math.round(weatherData.main.temp);
-                const feelsLike = Math.round(weatherData.main.feels_like);
-                const minTemp = Math.round(weatherData.main.temp_min);
-                const maxTemp = Math.round(weatherData.main.temp_max);
-                const humidity = Math.round(weatherData.main.humidity);
-                const description = (weatherData.weather[0].description).toUpperCase();
-                const iconURL = "https://openweathermap.org/img/wn/" + weatherData.weather[0].icon + "@2x.png"
-                //Multiplication to convert m/s to mph
-                const wind = Math.round((weatherData.wind.speed) * 2.237
-                );
-    
+            } else if (cod === 200) {
+                const iconURL = "https://openweathermap.org/img/wn/" + weather[0].icon + "@2x.png"
+
                 //Data Render    
-                res.render("query", { Location: queryLocation, Description: description, Temperature: temp, FeelsLike: feelsLike, MaxTemperature: maxTemp, MinTemperature: minTemp, Humidity: humidity, iconURL: iconURL, wind: wind, newSearch: newSearch });
-    
+                res.render("query", { main: main, weather: weather, wind: wind, name: name, iconURL: iconURL });
+
                 // Unknown Error    
             } else {
                 res.render("error", { errorCode: "ERROR", errorMessage: "Please try again later." });
