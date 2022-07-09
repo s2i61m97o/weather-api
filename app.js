@@ -51,7 +51,7 @@ app.post("/", (req, res) => {
 
                 // Unknown Error    
             } else {
-                res.render("error", { errorCode: "ERROR", errorMessage: "Please try again later." });
+                res.render("error", { errorCode: "", errorMessage: "No location entered. Please try again" });
             }
         })
     })

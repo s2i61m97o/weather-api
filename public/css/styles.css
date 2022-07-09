@@ -1,7 +1,8 @@
+
 body {
   background-image: url("/assets/pexels-pixabay-460672.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: auto;
   font-family: "Quicksand", sans-serif;
   font-weight: 400;
 }
@@ -47,11 +48,12 @@ button {
 }
 
 footer {
+  display: flex;
+  flex-wrap: wrap-reverse;
   color: aliceblue;
-  text-align: right;
-  margin: 8rem auto;
-  position: fixed;
-  height: 50px;
+  justify-content: flex-end;
+  margin: 12rem auto;
+  position: relative;
   bottom: 0px;
   left: 0px;
   right: 0px;
@@ -67,4 +69,35 @@ footer p {
 .image-attri,
 .data-attri {
   text-shadow: none;
+}
+
+@media screen and (min-width: 1441px) {
+  body {
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  footer {
+    justify-content: center;
+    margin: 2rem auto;
+  }
+
+  footer p {
+    padding: 0.5rem;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 444px) {
+  .openweather {
+    max-width: 230px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  header {
+    width: 75%;
+  }
 }
