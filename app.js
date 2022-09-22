@@ -29,12 +29,16 @@ app.post("/", (req, res) => {
     const unit = "metric";
 
     //API Call
-    const url = "https://api.openweathermap.org/data/2.5/weather?q=" + queryLocation + "&appid=" + apiKey + "&units=" + unit;
+    const url = "https://api.openweathermap.org/data/2.5/forecast?q=" + queryLocation + "&appid=" + apiKey + "&units=" + unit;
 
     https.get(url, (response) => {
-        response.on("data", (data) => {
-            const weatherData = JSON.parse(data);
-            const { coord, weather, base, main, visibility, wind, clouds, dt, sts, timezone, id, name, cod, message } = weatherData;
+        let chunks = "";
+        response.on("data", (chunk) => {
+            chunks += chunk;
+        });
+        response.on("end", () => {
+            const weatherData = JSON.parse(chunks);
+            const { cod, message, cnt, list, city } = weatherData;
 
             //Unknown location error === 404
             if (cod === "404") {
@@ -43,11 +47,11 @@ app.post("/", (req, res) => {
                 res.render("error", { errorCode: errorCode, errorMessage: errorMessage });
 
                 //Successful Call === 200   
-            } else if (cod === 200) {
-                const iconURL = "https://openweathermap.org/img/wn/" + weather[0].icon + "@2x.png"
+            } else if (cod === "200") {
+                const iconURL = "https://openweathermap.org/img/wn/" + list[0].weather[0].icon + "@2x.png"
 
                 //Data Render    
-                res.render("query", { main: main, weather: weather, wind: wind, name: name, iconURL: iconURL });
+                res.render("query", { list: list, city: city, iconURL: iconURL });
 
                 // Unknown Error    
             } else {

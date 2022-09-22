@@ -3,31 +3,34 @@
     <header>
         <h3 class="prompt">Current Weather For</h3>
         <h1 class="title">
-            <%= name %>
+            <%= city.name %>
         </h1>
     </header>
 
-    <main>
+    <main class="currentWeather">
+        <% let currentWeather=list[0] %>
+            <% let currentMain=currentWeather.main %>
+                <% let currentWind=currentWeather.wind %>
+                    <% let currentDescription=currentWeather.weather[0] %>
+                        <img src=<%= iconURL %> class="img-fluid rounded-start">
+                        <h5 class="">
+                            <%= (currentDescription.description) %>
 
-        <img src=<%=iconURL %> class="img-fluid rounded-start">
-        <h5 class="">
-            <%= (weather[0].description).toUpperCase() %>
+                        </h5>
+                        <p class="">Temperature: <%= Math.round(currentMain.temp) %> ℃
+                        </p>
+                        <p class="">Feels Like: <%= Math.round(currentMain.feels_like) %> ℃
+                        </p>
+                        <p class="">Max Temperature: <%= Math.round(currentMain.temp_max) %> ℃
+                        </p>
+                        <p class="">Min Temperature: <%= Math.round(currentMain.temp_min) %> ℃
+                        </p>
 
-        </h5>
-        <p class="">Temperature: <%= Math.round(main.temp) %> ℃
-        </p>
-        <p class="">Feels Like: <%= Math.round(main.feels_like) %> ℃
-        </p>
-        <p class="">Max Temperature: <%= Math.round(main.temp_max) %> ℃
-        </p>
-        <p class="">Min Temperature: <%= Math.round(main.temp_min) %> ℃
-        </p>
-
-        <p class="">Humidity: <%= Math.round(main.humidity) %>
-        </p>
-        <p class=""> Wind Speed: <%= Math.round((wind.speed) * 2.237) %> mph</p>
-        </div>
-        <a class="btn btn-primary search-btn" href="/">New Search</a>
+                        <p class="">Humidity: <%= Math.round(currentMain.humidity) %>
+                        </p>
+                        <p class=""> Wind Speed: <%= Math.round((currentWind.speed) * 2.237) %> mph</p>
+                        </div>
+                        <a class="btn btn-primary search-btn" href="/">New Search</a>
     </main>
 
     <%- include("partials/footer") -%>
