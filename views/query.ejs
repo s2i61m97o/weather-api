@@ -1,38 +1,20 @@
 <%- include("partials/header") -%>
 
-    <header>
-        <h3 class="prompt">Current Weather For</h3>
-        <h1 class="title">
-            <%= city.name %>
-        </h1>
-    </header>
+    <div id="grid">
+        <div id="currentDisplay">
+            <img src="<%= iconURL %>" alt="<%= currentWeather[0].weather[0].description %> ">
+            <h1 class="placeName">
+                <%= city.name %>
+            </h1>
 
-    <main class="currentWeather">
-        <img src=<%=iconURL %> class="img-fluid rounded-start">
-        <h5 class="">
-            <%= (currentWeather[0].weather[0].description) %>
-
-        </h5>
-        <p class="">Temperature: <%= Math.round(currentWeather[0].main.temp) %> ℃
-        </p>
-        <p class="">Feels Like: <%= Math.round(currentWeather[0].main.feels_like) %> ℃
-        </p>
-        <p class="">Max Temperature: <%= Math.round(currentWeather[0].main.temp_max) %> ℃
-        </p>
-        <p class="">Min Temperature: <%= Math.round(currentWeather[0].main.temp_min) %> ℃
-        </p>
-
-        <p class="">Humidity: <%= Math.round(currentWeather[0].main.humidity) %>
-        </p>
-        <p class=""> Wind Speed: <%= Math.round((currentWeather[0].wind.speed) * 2.237) %> mph</p>
         </div>
-        <a class="btn btn-primary search-btn" href="/">New Search</a>
-    </main>
-
-    <section class="forecast">
-
-
-        
-    </section>
+        <div id="restOfTodayDisplay"></div>
+        <div id="restOfWeekDisplay">
+            <div id="tomorrowDisplay"></div>
+            <div id="day3Display"></div>
+            <div id="day4Display"></div>
+            <div id="day5Display"></div>
+        </div>
+    </div>
 
     <%- include("partials/footer") -%>

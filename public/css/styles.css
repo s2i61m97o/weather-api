@@ -1,4 +1,3 @@
-
 body {
   background-image: url("/assets/pexels-pixabay-460672.jpg");
   background-repeat: no-repeat;
@@ -8,7 +7,7 @@ body {
 }
 
 header,
-main {
+.searchform {
   color: #151518;
   width: 40%;
   margin: 0 auto;
@@ -24,6 +23,7 @@ header {
   padding: 1.5rem;
   font-size: 2.25rem;
 }
+
 
 .error-message {
   font-size: 1.5rem;

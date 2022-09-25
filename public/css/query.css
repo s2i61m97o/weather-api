@@ -1,0 +1,92 @@
+body {
+    background-image: url("/assets/pexels-pixabay-460672.jpg");
+    background-repeat: no-repeat;
+    background-size: auto;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 400;
+  }
+
+  .placeName {
+    padding: 4.375rem;
+    font-size: 3rem;
+  }
+
+  #grid {
+    display: grid;
+    grid-template-columns: 33% 66%;
+    grid-template-rows: 33% 66%;
+    width: auto;
+    height: auto;
+  }
+  
+  #currentDisplay {
+    border: 1px red dashed;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
+  
+  #restOfTodayDisplay {
+    border: 1px blue dashed;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+  
+  #restOfWeekDisplay {
+    border: 1px green dashed;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+  }
+  
+  #tomorrowDisplay {
+    border: 1px purple dashed;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    
+  }
+  #day3Display {
+    border: 1px purple dashed;
+    grid-column-start: 2;
+    grid-column-end: 3;
+  }
+  #day4Display {
+    border: 1px purple dashed;
+    grid-column-start: 3;
+    grid-column-end: 4;
+  }
+  #day5Display {
+    border: 1px purple dashed;
+    grid-column-start: 4;
+    grid-column-end: 5;
+  }
+
+  footer {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    color: aliceblue;
+    justify-content: flex-end;
+    margin: 12rem auto;
+    position: relative;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+  }
+  
+  footer p {
+    text-shadow: 0.5px 0.5px 1px black;
+    display: inline;
+    padding: 1rem;
+  }
+  
+  .image-attri,
+  .data-attri {
+    text-shadow: none;
+  }

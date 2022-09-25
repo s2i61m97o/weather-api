@@ -18,7 +18,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Homepage Render
-app.get("/", (req, res) => res.render("home"));
+app.get("/", (req, res) => res.render("home", {stylesheet: "styles"}));
 
 //Query Request
 app.post("/", (req, res) => {
@@ -43,44 +43,33 @@ app.post("/", (req, res) => {
             if (cod === "404") {
                 const errorCode = cod;
                 const errorMessage = (message).toUpperCase();
-                res.render("error", { errorCode: errorCode, errorMessage: errorMessage });
+                res.render("error", { errorCode: errorCode, errorMessage: errorMessage, stylesheet: "styles" });
 
                 //Successful Call === 200   
             } else if (cod === "200") {
                 const iconURL = "https://openweathermap.org/img/wn/" + list[0].weather[0].icon + "@2x.png"
 
                 const currentDate = (new Date()).getDay();
-                let weatherSun = [],
-                    weatherMon = [],
-                    weatherTue = [],
-                    weatherWed = [],
-                    weatherThur = [],
-                    weatherFri = [],
-                    weatherSat = [],
-                    currentWeather,
-                    weatherTomorrow,
-                    weatherDay3,
-                    weatherDay4,
-                    weatherDay5;
+                let [weatherSun, weatherMon, weatherTue, weatherWed, weatherThur, weatherFri, weatherSat, currentWeather, weatherTomorrow, weatherDay3, weatherDay4, weatherDay5] = [[], [], [], [], [], [], []];
 
                 for (let i = 0; i < 40; i++) {
                     let weatherDay = (new Date(list[i].dt_txt)).getDay();
                     switch (weatherDay) {
-                        case 0: weatherSun.push(list[i])
+                        case 0: weatherSun.push(list[i]);
                             break;
-                        case 1: weatherMon.push(list[i])
+                        case 1: weatherMon.push(list[i]);
                             break;
-                        case 2: weatherTue.push(list[i])
+                        case 2: weatherTue.push(list[i]);
                             break;
-                        case 3: weatherWed.push(list[i])
+                        case 3: weatherWed.push(list[i]);
                             break;
-                        case 4: weatherThur.push(list[i])
+                        case 4: weatherThur.push(list[i]);
                             break;
-                        case 5: weatherFri.push(list[i])
+                        case 5: weatherFri.push(list[i]);
                             break;
-                        case 6: weatherSat.push(list[i])
+                        case 6: weatherSat.push(list[i]);
                             break;
-                        default: console.log("array sort error")
+                        default: console.log("array sort error");
                     }
 
                     switch (currentDate) {
@@ -126,11 +115,9 @@ app.post("/", (req, res) => {
                             weatherDay4 = weatherTue;
                             weatherDay5 = weatherWed;
                             break;
-                        default: console.log("day assigning error")
+                        default: console.log("day assigning error");
                     }
                 };
-                // console.log(currentWeather[0].weather[0].description);
-
 
                 //Data Render    
                 res.render("query", {
@@ -140,12 +127,13 @@ app.post("/", (req, res) => {
                     weatherDay4: weatherDay4,
                     weatherDay5: weatherDay5,
                     city: city,
-                    iconURL: iconURL
+                    iconURL: iconURL,
+                    stylesheet: "query"
                 });
 
                 // Unknown Error    
             } else {
-                res.render("error", { errorCode: "", errorMessage: "No location entered. Please try again" });
+                res.render("error", { errorCode: "", errorMessage: "No location entered. Please try again", stylesheet: "styles" });
             }
         })
     })
