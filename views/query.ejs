@@ -1,33 +1,193 @@
 <%- include("partials/header") -%>
 
-    <header>
-        <h3 class="prompt">Current Weather For</h3>
-        <h1 class="title">
-            <%= name %>
-        </h1>
-    </header>
+    <h1 class="place-name">
+        <%= city.name %>
+    </h1>
 
-    <main>
+    <div id="grid">
+        <div id="current-display">
 
-        <img src=<%=iconURL %> class="img-fluid rounded-start">
-        <h5 class="">
-            <%= (weather[0].description).toUpperCase() %>
+            <h3 class="day">TODAY</h3>
+            <div class="current-main">
+                <div class="icon">
+                    <img src="<%= iconURLStart + currentWeather[0].weather[0].icon + iconURLEnd %>"
+                        alt="<%= currentWeather[0].weather[0].description %> " class="today-icon">
+                </div>
+                <div class="main-info">
+                    <h4>
+                        <%= Math.round(currentWeather[0].main.temp) %>&#8451
+                    </h4>
+                    <h4 class="main-description">
+                        <%= currentWeather[0].weather[0].description %>
+                    </h4>
+                </div>
+            </div>
 
-        </h5>
-        <p class="">Temperature: <%= Math.round(main.temp) %> ℃
-        </p>
-        <p class="">Feels Like: <%= Math.round(main.feels_like) %> ℃
-        </p>
-        <p class="">Max Temperature: <%= Math.round(main.temp_max) %> ℃
-        </p>
-        <p class="">Min Temperature: <%= Math.round(main.temp_min) %> ℃
-        </p>
+            <div class="current-additional">
+                <h5 class="main-wind main-additional"> Wind Speed:
+                    <%= Math.round(currentWeather[0].wind.speed * 2.237) %> mph
+                </h5>
+                <h5 class="main-humid main-additional"> Humidity:
+                    <%= currentWeather[0].main.humidity%>&#37;
+                </h5>
+                <h5 class="main-chance-of-rain main-additional">Chance of Precipitation:
+                    <%= Math.round(currentWeather[0].pop * 100)%>&#37;
+                </h5>
+                <% let windDirection=getCardinalDirection(currentWeather[0].wind.deg) %>
+                    <h5>
+                        <%= windDirection %>
+                    </h5>
+            </div>
 
-        <p class="">Humidity: <%= Math.round(main.humidity) %>
-        </p>
-        <p class=""> Wind Speed: <%= Math.round((wind.speed) * 2.237) %> mph</p>
+            <div class="later-today">
+                <div class="weather-container">
+                    <% currentWeather.forEach((weatherSet)=> { %>
+                        <div class="container-column">
+                            <% const time=weatherSet.dt_txt %>
+                                <h4 class="time">
+                                    <%= time.slice(11, 16) %>
+                                </h4>
+                                <img src="<%= iconURLStart + weatherSet.weather[0].icon + iconURLEnd %>"
+                                    alt="<%= weatherSet.weather[0].description %>">
+                                <h5 class="time-item">
+                                    <%= Math.round(weatherSet.main.temp) %>&#8451
+                                </h5>
+                                <h5 class="time-item">
+                                    <%= Math.round(weatherSet.pop * 100)%>&#37;
+                                </h5>
+                                <h5 class="time-item">
+                                    <%= Math.round(weatherSet.wind.speed * 2.237) %> mph
+                                </h5>
+                                <% let windDirection=getCardinalDirection(weatherSet.wind.deg) %>
+                                    <h5 class="time-item">
+                                        <%= windDirection %>
+                                    </h5>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
         </div>
-        <a class="btn btn-primary search-btn" href="/">New Search</a>
-    </main>
+
+        <div id="rest-of-week-display">
+            <div id="tomorrow-display">
+                <h3 class="day">TOMORROW</h3>
+                <div class="weather-container">
+                    <% weatherTomorrow.forEach((weatherSet)=> {%>
+                        <div class="container-column">
+                            <% const time=weatherSet.dt_txt %>
+                                <h4 class="time">
+                                    <%= time.slice(11, 16) %>
+                                </h4>
+                                <img src="<%= iconURLStart + weatherSet.weather[0].icon + iconURLEnd %>"
+                                    alt="<%= weatherSet.weather[0].description %> ">
+                                <h5>
+                                    <%= Math.round(weatherSet.main.temp) %>&#8451
+                                </h5>
+                                <h5>
+                                    <%= Math.round(weatherSet.pop * 100)%>&#37;
+                                </h5>
+                                <h5>
+                                    <%= Math.round(weatherSet.wind.speed * 2.237) %> mph
+                                </h5>
+                                <% let windDirection=getCardinalDirection(weatherSet.wind.deg) %>
+                                    <h5>
+                                        <%= windDirection %>
+                                    </h5>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+
+            <div class="next-three-days">
+                <div id="day-3-display">
+                    <% let day3=getArrayDay(weatherDay3) %>
+                        <h3 class="day">
+                            <%= day3 %>
+                        </h3>
+                        <% weatherDay3.forEach((weatherSet)=> { %>
+                            <div class="container-row">
+                                <% const time=weatherSet.dt_txt %>
+                                    <h4 class="time">
+                                        <%= time.slice(11, 16) %>
+                                    </h4>
+                                    <img src="<%= iconURLStart + weatherSet.weather[0].icon + iconURLEnd %>"
+                                        alt="<%= weatherSet.weather[0].description %> ">
+                                    <h5>
+                                        <%= Math.round(weatherSet.main.temp) %>&#8451
+                                    </h5>
+                                    <h5>
+                                        <%= Math.round(weatherSet.pop * 100)%>&#37;
+                                    </h5>
+                                    <h5 class="wind-speed">
+                                        <%= Math.round(weatherSet.wind.speed * 2.237) %> mph
+                                    </h5>
+                                    <% let windDirection=getCardinalDirection(weatherSet.wind.deg) %>
+                                        <h5>
+                                            <%= windDirection %>
+                                        </h5>
+                            </div>
+                            <% }) %>
+                </div>
+                <div id="day-4-display">
+                    <% let day4=getArrayDay(weatherDay4) %>
+                        <h3 class="day">
+                            <%= day4 %>
+                        </h3>
+                        <% weatherDay4.forEach((weatherSet)=> { %>
+                            <div class="container-row">
+                                <% const time=weatherSet.dt_txt %>
+                                    <h4 class="time">
+                                        <%= time.slice(11, 16) %>
+                                    </h4>
+                                    <img src="<%= iconURLStart + weatherSet.weather[0].icon + iconURLEnd %>"
+                                        alt="<%= weatherSet.weather[0].description %> ">
+                                    <h5>
+                                        <%= Math.round(weatherSet.main.temp) %>&#8451
+                                    </h5>
+                                    <h5>
+                                        <%= Math.round(weatherSet.pop * 100)%>&#37;
+                                    </h5>
+                                    <h5 class="wind-speed">
+                                        <%= Math.round(weatherSet.wind.speed * 2.237) %> mph
+                                    </h5>
+                                    <% let windDirection=getCardinalDirection(weatherSet.wind.deg) %>
+                                        <h5>
+                                            <%= windDirection %>
+                                        </h5>
+                            </div>
+                            <% }) %>
+                </div>
+                <div id="day-5-display">
+                    <% let day5=getArrayDay(weatherDay5) %>
+                        <h3 class="day">
+                            <%= day5 %>
+                        </h3>
+                        <% weatherDay5.forEach((weatherSet)=> { %>
+                            <div class="container-row">
+                                <% const time=weatherSet.dt_txt %>
+                                    <h4 class="time">
+                                        <%= time.slice(11, 16) %>
+                                    </h4>
+                                    <img src="<%= iconURLStart + weatherSet.weather[0].icon + iconURLEnd %>"
+                                        alt="<%= weatherSet.weather[0].description %> ">
+                                    <h5>
+                                        <%= Math.round(weatherSet.main.temp) %>&#8451
+                                    </h5>
+                                    <h5>
+                                        <%= Math.round(weatherSet.pop * 100)%>&#37;
+                                    </h5>
+                                    <h5 class="wind-speed">
+                                        <%= Math.round(weatherSet.wind.speed * 2.237) %> mph
+                                    </h5>
+                                    <% let windDirection=getCardinalDirection(weatherSet.wind.deg) %>
+                                        <h5>
+                                            <%= windDirection %>
+                                        </h5>
+                            </div>
+                            <% }) %>
+                </div>
+            </div>
+        </div>     
+    </div>
 
     <%- include("partials/footer") -%>
