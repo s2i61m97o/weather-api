@@ -18,7 +18,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Homepage Render
-app.get("/", (req, res) => res.render("home", {stylesheet: "styles"}));
+app.get("/", (req, res) => res.render("home", { stylesheet: "home" }));
 
 //Query Request
 app.post("/", (req, res) => {
@@ -43,11 +43,12 @@ app.post("/", (req, res) => {
             if (cod === "404") {
                 const errorCode = cod;
                 const errorMessage = (message).toUpperCase();
-                res.render("error", { errorCode: errorCode, errorMessage: errorMessage, stylesheet: "styles" });
+                res.render("error", { errorCode: errorCode, errorMessage: errorMessage, stylesheet: "error" });
 
                 //Successful Call === 200   
             } else if (cod === "200") {
-                const iconURL = "https://openweathermap.org/img/wn/" + list[0].weather[0].icon + "@2x.png"
+                const iconURLStart = "https://openweathermap.org/img/wn/"
+                const iconURLEnd = "@2x.png"
 
                 const currentDate = (new Date()).getDay();
                 let [weatherSun, weatherMon, weatherTue, weatherWed, weatherThur, weatherFri, weatherSat, currentWeather, weatherTomorrow, weatherDay3, weatherDay4, weatherDay5] = [[], [], [], [], [], [], []];
@@ -119,6 +120,18 @@ app.post("/", (req, res) => {
                     }
                 };
 
+                //Function to change wind degrees to direction
+                function getCardinalDirection(angle) {
+                    const directions = ['↑ N', '↗ NE', '→ E', '↘ SE', '↓ S', '↙ SW', '← W', '↖ NW'];
+                    return directions[Math.round(angle / 45) % 8];
+                };
+
+                //Function to get day
+                function getArrayDay(array) {
+                    const day = new Date(array[0].dt_txt).toLocaleString('en-us', { weekday: 'long' });
+                    return day
+                }
+
                 //Data Render    
                 res.render("query", {
                     currentWeather: currentWeather,
@@ -127,13 +140,16 @@ app.post("/", (req, res) => {
                     weatherDay4: weatherDay4,
                     weatherDay5: weatherDay5,
                     city: city,
-                    iconURL: iconURL,
-                    stylesheet: "query"
+                    iconURLStart: iconURLStart,
+                    iconURLEnd: iconURLEnd,
+                    stylesheet: "query",
+                    getCardinalDirection: getCardinalDirection,
+                    getArrayDay: getArrayDay
                 });
 
                 // Unknown Error    
             } else {
-                res.render("error", { errorCode: "", errorMessage: "No location entered. Please try again", stylesheet: "styles" });
+                res.render("error", { errorCode: "", errorMessage: "No location entered. Please try again", stylesheet: "error" });
             }
         })
     })
