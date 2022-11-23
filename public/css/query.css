@@ -1,12 +1,12 @@
 body {
-  /* background-image: url("/assets/pexels-pixabay-460672.jpg");
-  background-repeat: no-repeat; */
+  /* background-image: url("/assets/pexels-pixabay-460672.jpg"); */
+  background-repeat: no-repeat;
   background-size: auto;
   font-family: "Quicksand", sans-serif;
   font-weight: 400;
 }
 
-#grid,
+/* #grid,
 .current-main,
 .container-row,
 .weather-container,
@@ -14,7 +14,7 @@ body {
 footer {
   display: flex;
   flex-wrap: wrap;
-}
+} */
 
 #current-display,
 .place-name,
@@ -26,46 +26,13 @@ footer {
   text-align: center;
 }
 
-#current-display {
-  flex-basis: 39.0625rem;
-  border: green solid 1px;
-  border-radius: 3.125rem;
-  -webkit-border-radius: 3.125rem;
-  -moz-border-radius: 3.125rem;
-  -ms-border-radius: 3.125rem;
-  -o-border-radius: 3.125rem;
-}
-
-#rest-of-week-display {
-  flex-basis: 78.4375rem;
-}
-
-#tomorrow-display {
-  margin-bottom: 2rem;
-  border: red 1px solid;
-  border-radius: 3.125rem;
-  -webkit-border-radius: 3.125rem;
-  -moz-border-radius: 3.125rem;
-  -ms-border-radius: 3.125rem;
-  -o-border-radius: 3.125rem;
-}
-
 .place-name {
-  padding: 4.375rem 20rem 0 0;
+  padding: 2.9375rem 0 0 0;
   font-size: 3rem;
 }
 
 .day {
   padding-top: 2rem;
-}
-
-.current-main {
-  margin: 1rem 1rem 0rem 10rem;
-  width: inherit;
-}
-
-.main-info {
-  margin: 1rem 0rem 0rem 3rem;
 }
 
 .main-description {
@@ -78,7 +45,15 @@ footer {
 
 .later-today {
   margin-top: 2rem;
+  display: flex;
+  width: 100%;
 }
+
+.key {
+  flex-basis: content;
+  position: absolute;
+  left: 200px;
+} 
 
 .container-row {
   justify-content: space-evenly;
@@ -86,13 +61,19 @@ footer {
 }
 
 .time-item {
-  padding-top: 35px;
+  padding-top: 15px;
+}
+
+.weather-key {
+  padding: 38px 0 30px;
 }
 
 .weather-container {
+  display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
+  width: 100%;
 }
 
 .next-three-days {
@@ -102,9 +83,9 @@ footer {
 #day-3-display,
 #day-4-display,
 #day-5-display {
-  max-width: 420px;
-  padding: 0 1.4063rem;
-  border: blue 1px solid;
+  max-width: 415px;
+  padding: 0 1rem;
+  /* border: blue 1px solid; */
   border-radius: 3.125rem;
   -webkit-border-radius: 3.125rem;
   -moz-border-radius: 3.125rem;
